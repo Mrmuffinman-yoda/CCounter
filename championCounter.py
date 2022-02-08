@@ -13,13 +13,20 @@ class champion:
         champion.patchChecker()
         #Check if we are up to date with patches
         while(turner):
-            print("Options : [Counter : 1] [Quit : 2 ]")
+            print("Options : [Counter Input : 1] [Counter finder : 2] [Change Patch Version : 3] [Quit : 4 ]")
             userInput = input("What would you like to do ? : ")
             if (userInput == "1"):
-                champion.counter()
+                champion.counter() # Needs to be complete
             elif(userInput == "2"):
-                exit()
+                champion.counterFinder() # Not started
+            elif(userInput == "3"):
+                champion.patchChecker() # Done
+            elif(userInput == "4"):
+                exit() # Done
 
+    def counterFinder():
+        # Needs to be complete
+        return None
     def counter():
         #Counter inputter into file directory
         myChampion =input("What champion did you play? : ")
