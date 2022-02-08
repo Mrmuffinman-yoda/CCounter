@@ -1,8 +1,10 @@
+import os
 class champion:
     #Lets first import the colours to make some text more expressive
     import colorama
     from colorama import Fore, Back, Style
     colorama.init()
+    patchVersion = None
     def main():
         # Main method
         turner = True
@@ -32,12 +34,14 @@ class champion:
         myChampion =input("What champion did you play? : ")
         enemyChampion = input("What champion did you vs? :")
         boolWOL = input("Did you win or lose ? :" )
-        f = open(f"champions/{myChampion}.txt","x")
+        os.mkdir(f"internal/patch/{champion.patchVersion}/{myChampion}")
+        championCounter = open(f"internal/patch/{champion.patchVersion}/{myChampion}/counter.txt","x")
 
     def patchChecker():
         #Open patch.txt and print patch version
         patch = open("internal/patch.txt","r")
-        print(f"Is the current version still => {champion.Fore.RED}{patch.readline()}{champion.Style.RESET_ALL}?")
+        champion.patchVersion = patch.readline()
+        print(f"Is the current version still => {champion.Fore.RED}{champion.patchVersion}{champion.Style.RESET_ALL}?")
         patch.close()
         #Ask user if this is the correct patch or not
         val = input("yes or no ?: ")
@@ -60,6 +64,7 @@ class champion:
             newVersion = str(newVersion)
             patch = open("internal/patch.txt","w")
             patch.write(newVersion)
+            champion.patchVersion = newVersion
             patch.close()
         patch = open("internal/patch.txt","r")
         print(f"Changing patch version to {champion.Fore.GREEN}{patch.readline()}{champion.Style.RESET_ALL} ")
