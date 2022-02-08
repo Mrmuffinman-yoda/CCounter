@@ -44,14 +44,6 @@ class champion:
         patch.close()
         #Ask user if this is the correct patch or not
         val = input("yes or no ?: ")
-        # match val:
-        #     case "yes":
-        #         print(f"Continuing with patch{patch}")
-        #     case "no":
-        #         newVersion = input("What version are we currently on ?")
-        #         patch.open(".internal/patch.txt","w")
-        #         patch.write(newVersion)
-        #         patch.close()
         if(val == "yes"):
             print(f"Continuing with patch{patch}")
         elif(val == "no"):
