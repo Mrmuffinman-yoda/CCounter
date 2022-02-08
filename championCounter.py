@@ -7,14 +7,12 @@ class champion:
     patchVersion = None
     def main():
         # Main method
-        turner = True
-        #Check if user wants to stay in the while loop
-        print("Welcome to the champion counterpicker!")
+        print("Welcome to the champion counter picker!")
         print("You will have to remind me of a new patch though...")
         #Intro text
         champion.patchChecker()
         #Check if we are up to date with patches
-        while(turner):
+        while(True):
             print("Options : [Counter Input : 1] [Counter finder : 2] [Change Patch Version : 3] [Quit : 4 ]")
             userInput = input("What would you like to do ? : ")
             if (userInput == "1"):
@@ -31,8 +29,9 @@ class champion:
         return None
     def counter():
         #Counter inputter into file directory
-        myChampion =input("What champion did you play? : ")
-        enemyChampion = input("What champion did you vs? :")
+        myChampion =input("What champion did you play ? : ")
+        myChampion = myChampion.lower()
+        enemyChampion = input("What champion did you vs ? :")
         boolWOL = input("Did you win or lose ? :" )
         os.mkdir(f"internal/patch/{champion.patchVersion}/{myChampion}")
         championCounter = open(f"internal/patch/{champion.patchVersion}/{myChampion}/counter.txt","x")
@@ -57,7 +56,7 @@ class champion:
             print(f"Continuing with patch{patch}")
         elif(val == "no"):
             try: 
-                newVersion = int(input("What version are we currently on ? : "))
+                newVersion = float(input("What version are we currently on ? : "))
             except:
                 print("Invalid input")
                 champion.patchChecker()
