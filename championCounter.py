@@ -1,4 +1,5 @@
 import os
+from playsound import playsound
 class champion:
     #Lets first import the colours to make some text more expressive
     import colorama
@@ -8,6 +9,7 @@ class champion:
     def main():
         # Main method
         print("Welcome to the champion counter picker!")
+        playsound('audio/neverUnderestimate.mp3')
         print("You will have to remind me of a new patch though...")
         #Intro text
         champion.patchChecker()
@@ -22,6 +24,7 @@ class champion:
             elif(userInput == "3"):
                 champion.patchChecker() # Done
             elif(userInput == "4"):
+                playsound('audio/hut234.mp3')
                 exit() # Done
 
     def counterFinder():
@@ -33,6 +36,8 @@ class champion:
         myChampion = myChampion.lower()
         enemyChampion = input("What champion did you vs ? :")
         boolWOL = input("Did you win or lose ? :" )
+        if(boolWOL == "lose"):
+            playsound('audio/DatsGottaSting.mp3')
         os.mkdir(f"internal/patch/{champion.patchVersion}/{myChampion}")
         championCounter = open(f"internal/patch/{champion.patchVersion}/{myChampion}/counter.txt","x")
 
@@ -45,10 +50,12 @@ class champion:
         #Ask user if this is the correct patch or not
         val = input("yes or no ?: ")
         if(val == "yes"):
-            print(f"Continuing with patch{patch}")
+            print(f"Continuing with patch {champion.patchVersion}")
+            playsound('audio/reportingIn.mp3')
         elif(val == "no"):
             try: 
                 newVersion = float(input("What version are we currently on ? : "))
+                playsound('audio/YesSir.mp3')
             except:
                 print("Invalid input")
                 champion.patchChecker()
