@@ -32,15 +32,21 @@ class champion:
         return None
     def counter():
         #Counter inputter into file directory
-        myChampion =input("What champion did you play ? : ")
-        myChampion = myChampion.lower()
-        enemyChampion = input("What champion did you vs ? :")
-        boolWOL = input("Did you win or lose ? :" )
-        if(boolWOL == "lose"):
+        myChampion =input("What champion did you play ? : ").lower()
+        enemyChampion = input("What champion did you vs ? :").lower()
+        boolWOL = input("Did you win or lose ? :" ).lower()
+        if(boolWOL == "lose"):  
             playsound('audio/DatsGottaSting.mp3')
-        os.mkdir(f"internal/patch/{champion.patchVersion}/{myChampion}")
-        championCounter = open(f"internal/patch/{champion.patchVersion}/{myChampion}/counter.txt","x")
-
+        if(os.path.exists(f"internal/patch/{champion.patchVersion}/{myChampion}/counter.txt")):
+            championCounter = open(f"internal/patch/{champion.patchVersion}/{myChampion}/counter.txt","a")
+            print("Opening file")
+            print("File has been written!")
+        else:
+            os.mkdir(f"internal/patch/{champion.patchVersion}/{myChampion}")
+            championCounter = open(f"internal/patch/{champion.patchVersion}/{myChampion}/counter.txt","x")
+            print("Creating a new file")
+        championCounter.write(f"{myChampion}-{enemyChampion}-{boolWOL}")
+        championCounter.write("\n")
     def patchChecker():
         #Open patch.txt and print patch version
         patch = open("internal/patch.txt","r")
@@ -65,7 +71,7 @@ class champion:
             champion.patchVersion = newVersion
             patch.close()
         patch = open("internal/patch.txt","r")
-        print(f"Changing patch version to {champion.Fore.GREEN}{patch.readline()}{champion.Style.RESET_ALL} ")
+        print(f"PATCH VERSION : {champion.Fore.GREEN}{patch.readline()}{champion.Style.RESET_ALL} ")
 
 champion.main()
     
