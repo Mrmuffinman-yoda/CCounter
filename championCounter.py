@@ -28,13 +28,32 @@ class champion:
                 exit() # Done
 
     def counterFinder():
-        # Needs to be complete
-        return None
+        findChampion = input("Who do you need to find a counter for ?")
+        try:
+            counterFinder = open(f"internal/patch/{champion.patchVersion}/{findChampion}/counter.txt","r")
+            lineReader = counterFinder.readlines()
+            lineReader = champion.endChopper(lineReader)
+            os.system("cls")
+            print(lineReader)
+
+        except:
+            print(f"There is no information on {findChampion}"
+        )
+    
+    def endChopper(counterArray):
+        for i in range(len(counterArray)):
+            counterArray[i] = counterArray[i][:-1]
+        return counterArray
+
+
     def counter():
         #Counter inputter into file directory
         myChampion =input("What champion did you play ? : ").lower()
         enemyChampion = input("What champion did you vs ? :").lower()
         boolWOL = input("Did you win or lose ? :" ).lower()
+        if(boolWOL != "win" or boolWOL != "lose"):
+            print(f"{boolWOL} is an invalid input")
+            champion.counter()
         if(boolWOL == "lose"):  
             playsound('audio/DatsGottaSting.mp3')
         if(os.path.exists(f"internal/patch/{champion.patchVersion}/{myChampion}/counter.txt")):
@@ -47,6 +66,7 @@ class champion:
             print("Creating a new file")
         championCounter.write(f"{myChampion}-{enemyChampion}-{boolWOL}")
         championCounter.write("\n")
+        championCounter.close()
     def patchChecker():
         #Open patch.txt and print patch version
         patch = open("internal/patch.txt","r")
